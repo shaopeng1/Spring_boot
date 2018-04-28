@@ -1,0 +1,16 @@
+centos安装mysql
+1.下载rpm包    wget http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+2.安装rpm包    rpm -ivh mysql-community-release-el6-5.noarch.rpm
+3.通过yum命令安装mysql服务以及其依赖关系  yum install mysql-server  出现提示一直Y
+4.检测是否成功  进入etc/yum.repos.d文件多出 mysql-community-source.repo   mysql-community.repo即为成功
+5.首次登录mysql    mysql -u root回车显示  mysql>  即为成功
+6.修改mysql登录密码   set password=password('123456');  
+7.开启远程连接   登录mysql
+    7.1  grant all privileges on *.* to 'root'@'%' identified by '123456' with grant option;
+         root是用户名，%代表任意主机，'123456'指定的登录密码（这个和本地的root密码可以设置不同的，互不影响）
+    7.2  flush privileges; # 重载系统权限
+    7.3  exit;
+    7.4  iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT
+         查看规则是否生效
+    7.5  iptables -L -n
+    7.6  关闭远程连接  iptables -D INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT
