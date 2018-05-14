@@ -23,3 +23,22 @@ centos安装mysql
 3.在基本相同的命令换行添加-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
 4.将iptables服务重启。      service iptables restart
 （参考链接  https://blog.csdn.net/yueaini10000/article/details/52918943）
+
+
+安装nginx
+	1.nginx下载地址（http://nginx.org/download/）	
+	2.nginx的编译需要c++，同时prce（重定向支持）和openssl（https支持）也需要安装。
+            yum install gcc-c++  
+            yum -y install pcre*  
+            yum -y install openssl*
+	3.将压缩文件放在/usr/local下解压
+	4.进入[root@admin local]# cd nginx-1.9.9
+	5.设置安装目录  [root@admin nginx-1.9.9]# ./configure --prefix=/usr/local/nginx  （直接打）
+	6.编译安装
+            [root@admin nginx-1.9.9]# make  
+            [root@admin nginx-1.9.9]# make install 
+	7.打开80端口防火墙
+	8.启动服务
+      	    [root@admin ~]# cd /usr/local/nginx  
+	    [root@admin sbin]# ./nginx 
+        9.ip+80访问出现（welcaome to nginx）成功
