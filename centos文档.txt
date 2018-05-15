@@ -42,3 +42,14 @@ centos安装mysql
       	    [root@admin ~]# cd /usr/local/nginx  
 	    [root@admin sbin]# ./nginx 
         9.ip+80访问出现（welcaome to nginx）成功
+
+
+启动多个tomcate（http://www.360doc.com/content/15/1208/17/9552892_518792749.shtml）
+       第一个不用修改其余的service.xml全部修改
+         <Connector port="18009" protocol="AJP/1.3" redirectPort="18443" />
+         <Connector port="8081" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="18443" />
+         <Server port="18005" shutdown="SHUTDOWN">
+       基本为所有端口不要相同，上述案例在说有端口全加了1    如：8443->18443
+    
